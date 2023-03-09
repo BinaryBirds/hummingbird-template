@@ -1,4 +1,6 @@
-name: CI
+name: Tests
+run-name: |
+  Test workflow
 
 on:
   push:
@@ -16,23 +18,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  macOS:
-    runs-on: macOS-latest
+  
+  unit-tests:
+
+    runs-on: self-hosted
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: SPM tests
-      run: swift test
-  linux:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        image:
-          - 'swift:5.5-focal'
-    container:
-      image: ${{ matrix.image }}
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Test
-      run: swift test
+
+    - name: Check out repository
+      uses: actions/checkout@v3
+      with:
+        path: app
+      
+    - name: Run tests with Thread Sanitizer
+      env:
+        SWIFT_DETERMINISTIC_HASHING: 1
+      run: |
+        swift test \
+          --parallel \
+          --enable-code-coverage \
+          --sanitize=thread
+      working-directory: app
+  
+  

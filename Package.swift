@@ -9,7 +9,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/hummingbird-project/hummingbird",
-            from: "1.0.0"
+            from: "1.2.0"
         ),
         .package(
             url: "https://github.com/apple/swift-argument-parser",

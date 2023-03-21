@@ -1,6 +1,10 @@
 import ArgumentParser
 import Hummingbird
 
+public protocol AppArguments {
+    
+}
+
 @main
 struct App: ParsableCommand, AppArguments {
     
@@ -13,7 +17,7 @@ struct App: ParsableCommand, AppArguments {
     func run() throws {
         let app = HBApplication(
             configuration: .init(
-                address: .hostname(self.hostname, port: self.port),
+                address: .hostname(hostname, port: port),
                 serverName: "Hummingbird"
             )
         )

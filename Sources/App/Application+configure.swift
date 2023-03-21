@@ -1,9 +1,5 @@
 import Hummingbird
 
-public protocol AppArguments {
-    
-}
-
 extension HBApplication {
 
     func configure(_ args: AppArguments) throws {
@@ -12,7 +8,7 @@ extension HBApplication {
             "Hello, world!"
         }
 
-        router.get("/health") { _ -> HTTPResponseStatus in
+        router.get("health") { _ -> HTTPResponseStatus in
             .ok
         }
     }
